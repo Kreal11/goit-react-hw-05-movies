@@ -18,13 +18,15 @@ export const MovieDetails = () => {
     getMovie();
   }, [movieId]);
 
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      MovieDetails
-      <h1></h1>
-      <h2></h2>
-      <h3></h3>
-      <p></p>
+      <h2>{movie.title}</h2>
+      <p>Оцінка: {movie.vote_average}</p>
+      <p>Опис: {movie.overview}</p>
       <div>
         <Outlet />
       </div>
