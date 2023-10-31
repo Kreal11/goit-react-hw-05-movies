@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
-import { fetchImgToMovieById, fetchMovieById } from 'services/movies-api.js';
+import { fetchVideoToMovieById, fetchMovieById } from 'services/movies-api.js';
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
@@ -13,9 +13,9 @@ export const MovieDetails = () => {
     const getMovie = async () => {
       try {
         const movieInfo = await fetchMovieById(movieId);
-        const { results } = await fetchImgToMovieById(movieId);
-        console.log(movieInfo);
-        console.log(results);
+        const { results } = await fetchVideoToMovieById(movieId);
+        // console.log(movieInfo);
+        // console.log(results);
         setVideo(results);
         setMovie(movieInfo);
       } catch (error) {}
@@ -39,6 +39,7 @@ export const MovieDetails = () => {
       <p>Rate: {movie.vote_average}/10</p>
       <p>Description: {movie.overview}</p>
       <p>Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
+      <h3>Watch the trailer!</h3>
       <iframe
         title={video}
         width="560"

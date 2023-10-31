@@ -26,11 +26,21 @@ export const fetchMovieById = async movieId => {
   return data;
 };
 
-export const fetchImgToMovieById = async movieId => {
+export const fetchVideoToMovieById = async movieId => {
   const { data } = await axios.get(`movie/${movieId}/videos`, {
     params: {
       api_key: API_KEY,
     },
   });
+  return data;
+};
+
+export const fetchCastToMovieById = async movieId => {
+  const { data } = await axios.get(`movie/${movieId}/credits`, {
+    params: {
+      api_key: API_KEY,
+    },
+  });
+  console.log(data);
   return data;
 };
