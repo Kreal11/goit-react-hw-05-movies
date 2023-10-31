@@ -1,18 +1,19 @@
 import React from 'react';
-import { useEffect, useState, useParams } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, useParams } from 'react-router-dom';
 import { fetchMovieById } from 'services/movies-api.js';
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState(null);
+
+  const [movie, setMovie] = useState();
 
   useEffect(() => {
-    const getMovie = async params => {
+    const getMovie = async () => {
       try {
-        const { results } = await fetchMovieById(movieId);
-        console.log(results);
-        setMovie(results);
+        const movieInfo = await fetchMovieById(movieId);
+        console.log(movieInfo);
+        setMovie(movieInfo);
       } catch (error) {}
     };
     getMovie();
