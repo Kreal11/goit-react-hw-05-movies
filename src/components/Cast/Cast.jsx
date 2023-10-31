@@ -4,14 +4,14 @@ import { fetchCastToMovieById } from 'services/movies-api';
 
 export const Cast = () => {
   const { movieId } = useParams();
-  const [cast, setCast] = useState(null);
+  const [cast, setCast] = useState([]);
 
   useEffect(() => {
     const getCast = async () => {
       try {
         const data = await fetchCastToMovieById(movieId);
-        // console.log(data);
-        setCast(data);
+        console.log(data);
+        setCast(prev => [...prev, ...data]);
       } catch (error) {}
     };
     getCast();
