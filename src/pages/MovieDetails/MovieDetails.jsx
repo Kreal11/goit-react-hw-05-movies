@@ -39,7 +39,7 @@ export const MovieDetails = () => {
       <p>Rate: {movie.vote_average}/10</p>
       <p>Description: {movie.overview}</p>
       <p>Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
-      <h3>Watch the trailer!</h3>
+
       <iframe
         title={video}
         width="560"
