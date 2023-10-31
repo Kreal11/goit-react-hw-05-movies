@@ -11,6 +11,7 @@ export const fetchTrendingMovies = async params => {
       api_key: API_KEY,
     },
   });
+  console.log(data);
   return data;
 };
 
@@ -18,6 +19,15 @@ export const fetchTrendingMovies = async params => {
 
 export const fetchMovieById = async movieId => {
   const { data } = await axios.get(`movie/${movieId}`, {
+    params: {
+      api_key: API_KEY,
+    },
+  });
+  return data;
+};
+
+export const fetchImgToMovieById = async movieId => {
+  const { data } = await axios.get(`movie/${movieId}/videos`, {
     params: {
       api_key: API_KEY,
     },

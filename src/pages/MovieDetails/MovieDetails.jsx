@@ -1,18 +1,22 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
-import { fetchMovieById } from 'services/movies-api.js';
+import { fetchImgToMovieById, fetchMovieById } from 'services/movies-api.js';
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
 
-  const [movie, setMovie] = useState();
+  const [movie, setMovie] = useState(null);
+  const [video, setVideo] = useState(null);
 
   useEffect(() => {
     const getMovie = async () => {
       try {
         const movieInfo = await fetchMovieById(movieId);
+        const { results } = await fetchImgToMovieById(movieId);
         console.log(movieInfo);
+        console.log(results);
+        setVideo(results);
         setMovie(movieInfo);
       } catch (error) {}
     };
@@ -26,10 +30,23 @@ export const MovieDetails = () => {
   return (
     <div>
       <h2>{movie.title}</h2>
-      <img src={movie.backdrop_path} alt="" />
+      <img
+        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+        alt=""
+        width="350"
+        height="500"
+      />
       <p>Rate: {movie.vote_average}/10</p>
       <p>Description: {movie.overview}</p>
       <p>Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
+      <iframe
+        title={video}
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${video[0].key}`}
+      >
+        {video.name}
+      </iframe>
       <div>
         <Outlet />
       </div>
