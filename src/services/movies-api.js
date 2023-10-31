@@ -22,6 +22,5 @@ export const fetchMovieById = async movieId => {
       api_key: API_KEY,
     },
   });
-  console.log(data);
   return data;
 };

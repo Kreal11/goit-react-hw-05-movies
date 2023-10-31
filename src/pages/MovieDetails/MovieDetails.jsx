@@ -26,8 +26,10 @@ export const MovieDetails = () => {
   return (
     <div>
       <h2>{movie.title}</h2>
-      <p>Оцінка: {movie.vote_average}</p>
-      <p>Опис: {movie.overview}</p>
+      <img src={movie.backdrop_path} alt="" />
+      <p>Rate: {movie.vote_average}/10</p>
+      <p>Description: {movie.overview}</p>
+      <p>Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
       <div>
         <Outlet />
       </div>
