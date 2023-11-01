@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { StyledNav, StyledNavLink } from './StyledNavbar';
 
 export const Navbar = () => {
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/movies">Movies</Link>
-    </nav>
+    <StyledNav>
+      <StyledNavLink to="/">Home</StyledNavLink>
+      <StyledNavLink to="/movies">Movies</StyledNavLink>
+    </StyledNav>
   );
 };

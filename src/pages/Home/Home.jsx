@@ -1,12 +1,13 @@
 import React, { Suspense, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import { fetchTrendingMovies } from 'services/movies-api';
+import { StyledHomeHeader, StyledHomeUl, StyledNavLink } from './StyledHome';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const getFilms = async params => {
+    const getFilms = async () => {
       try {
         const { results } = await fetchTrendingMovies();
         setMovies(prev => [...prev, ...results]);
@@ -18,15 +19,16 @@ const Home = () => {
 
   return (
     <Suspense>
-      <ul>
+      <StyledHomeHeader>🔥Trending movies of this week🔥</StyledHomeHeader>
+      <StyledHomeUl>
         {movies?.map(movie => (
           <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
+            <StyledNavLink to={`/movies/${movie.id}`}>
               {movie.title ?? movie.name ?? movie.original_name}
-            </Link>
+            </StyledNavLink>
           </li>
         ))}
-      </ul>
+      </StyledHomeUl>
     </Suspense>
   );
 };
