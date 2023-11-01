@@ -26,9 +26,13 @@ export const Reviews = () => {
           <ul>
             {reviews.map(review => (
               <li key={review.id}>
-                <h3>Author: {review.author}</h3>
-                <p>Review: {review.rating}</p>
-                <p>{review.content}</p>
+                <h3>Author: {review.author ? review.author : 'Anonymous'}</h3>
+                <p>Rate: {review.rating ? review.rating : 'No rate yet'}</p>
+                <p>
+                  {review.content && review.content !== '.'
+                    ? review.content
+                    : 'There are no comments by this author yet'}
+                </p>
               </li>
             ))}
           </ul>

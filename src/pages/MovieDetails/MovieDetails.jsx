@@ -34,7 +34,7 @@ export const MovieDetails = () => {
   return (
     <div>
       <Link to={goBackRef.current}>Go back</Link>
-      <h2>{movie.title}</h2>
+      <h2>{movie.title !== '' ? movie.title : 'No title assigned yet'}</h2>
       {movie.poster_path && (
         <img
           src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -43,9 +43,20 @@ export const MovieDetails = () => {
           height="500"
         />
       )}
-      <p>Rate: {movie.vote_average}/10</p>
-      <p>Description: {movie.overview}</p>
-      <p>Genres: {movie.genres?.map(genre => genre.name).join(', ')}</p>
+      <p>
+        Rate:{' '}
+        {movie.vote_average.length ? `${movie.vote_verage}/10` : 'No rate yet'}
+      </p>
+      <p>
+        Description:{' '}
+        {movie.overview !== '' ? movie.overview : 'No description yet'}
+      </p>
+      <p>
+        Genres:{' '}
+        {movie.genres.length
+          ? movie.genres?.map(genre => genre.name).join(', ')
+          : 'The movie has not yet been assigned any genre'}
+      </p>
       {video && (
         <iframe
           title={video}

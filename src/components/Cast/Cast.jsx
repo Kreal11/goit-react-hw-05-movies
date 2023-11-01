@@ -35,8 +35,15 @@ export const Cast = () => {
                 height="200"
               />
             )}
-            <p>{actor.name}</p>
-            <p>Character: {actor.character}</p>
+            <p>
+              {actor.name ? actor.name : 'No information about actor`s name'}
+            </p>
+            <p>
+              Character:{' '}
+              {actor.character
+                ? actor.character
+                : 'No information about actor`s character'}
+            </p>
           </li>
         ))}
       </ul>
