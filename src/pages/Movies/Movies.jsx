@@ -1,7 +1,11 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMovieByQuery } from 'services/movies-api';
-import { Link } from 'react-router-dom';
+import {
+  StyledInputWrapper,
+  StyledNavLink,
+  StyledSearchMoviesUl,
+} from './StyledMovies';
 
 const Movies = () => {
   const [foundMovies, setFoundMovies] = useState([]);
@@ -32,18 +36,23 @@ const Movies = () => {
 
   return (
     <Suspense>
-      <input value={value} onChange={handleChange} type="text" />
-      <button type="button" onClick={handleSetSearch}>
-        Search
-      </button>
-      <ul>
+      <StyledInputWrapper>
+        <input value={value} onChange={handleChange} type="text" />
+        <button type="button" onClick={handleSetSearch}>
+          Search
+        </button>
+      </StyledInputWrapper>
+      <StyledSearchMoviesUl>
         {query ? (
           foundMovies.length ? (
             foundMovies?.map(movie => (
               <li key={movie.id}>
-                <Link to={movie.id.toString()} state={{ from: location }}>
+                <StyledNavLink
+                  to={movie.id.toString()}
+                  state={{ from: location }}
+                >
                   {movie.title ?? movie.name ?? movie.original_name}
-                </Link>
+                </StyledNavLink>
               </li>
             ))
           ) : (
@@ -52,7 +61,7 @@ const Movies = () => {
         ) : (
           <h3>Start your search</h3>
         )}
-      </ul>
+      </StyledSearchMoviesUl>
     </Suspense>
   );
 };
