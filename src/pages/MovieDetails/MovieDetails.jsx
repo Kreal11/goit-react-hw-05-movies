@@ -1,5 +1,5 @@
 import React, { Suspense, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { fetchVideoToMovieById, fetchMovieById } from 'services/movies-api.js';
