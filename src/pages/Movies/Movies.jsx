@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMovieByQuery } from 'services/movies-api';
 import { Link } from 'react-router-dom';
 
 export const Movies = () => {
   const [foundMovies, setFoundMovies] = useState([]);
   const [value, setValue] = useState('');
+  const location = useLocation();
 
   const [search, setSearch] = useSearchParams();
   const query = search.get('query') || '';
@@ -22,7 +23,7 @@ export const Movies = () => {
     const getFoundMovies = async () => {
       try {
         const data = await fetchMovieByQuery({ query });
-        console.log(data);
+        // console.log(data);
         setFoundMovies(data.results);
       } catch (error) {}
     };
@@ -38,7 +39,7 @@ export const Movies = () => {
       <ul>
         {foundMovies?.map(movie => (
           <li key={movie.id}>
-            <Link to={movie.id.toString()}>
+            <Link to={movie.id.toString()} state={{ from: location }}>
               {movie.title ?? movie.name ?? movie.original_name}
             </Link>
           </li>

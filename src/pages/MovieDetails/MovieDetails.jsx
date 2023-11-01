@@ -1,11 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { fetchVideoToMovieById, fetchMovieById } from 'services/movies-api.js';
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
+  const location = useLocation();
+  const goBackRef = useRef(location.state?.from || '/');
 
   const [movie, setMovie] = useState({});
   const [video, setVideo] = useState({});
@@ -31,7 +33,7 @@ export const MovieDetails = () => {
 
   return (
     <div>
-      <Link to={'/'}>Go back</Link>
+      <Link to={goBackRef.current}>Go back</Link>
       <h2>{movie.title}</h2>
       {movie.poster_path && (
         <img
