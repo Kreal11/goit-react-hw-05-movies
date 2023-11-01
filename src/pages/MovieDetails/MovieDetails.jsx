@@ -3,6 +3,15 @@ import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { fetchVideoToMovieById, fetchMovieById } from 'services/movies-api.js';
+import {
+  StyledCastReviewWrapper,
+  StyledDescrWrapper,
+  StyledInfoMovieWrapper,
+  StyledMovieNavLink,
+  StyledMovieWrapper,
+  StyledTextWrapper,
+  StyledTitleWrapper,
+} from './StyledMovieDetails';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -32,31 +41,44 @@ const MovieDetails = () => {
   }
 
   return (
-    <div>
-      <Link to={goBackRef.current}>Go back</Link>
-      <h2>{movie.title !== '' ? movie.title : 'No title assigned yet'}</h2>
-      {movie.poster_path && (
-        <img
-          src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-          alt=""
-          width="350"
-          height="500"
-        />
-      )}
-      <p>
-        Rate:{' '}
-        {movie.vote_average.length ? `${movie.vote_verage}/10` : 'No rate yet'}
-      </p>
-      <p>
-        Description:{' '}
-        {movie.overview !== '' ? movie.overview : 'No description yet'}
-      </p>
-      <p>
-        Genres:{' '}
-        {movie.genres.length
-          ? movie.genres?.map(genre => genre.name).join(', ')
-          : 'The movie has not yet been assigned any genre'}
-      </p>
+    <StyledMovieWrapper>
+      <StyledDescrWrapper>
+        <StyledTitleWrapper>
+          <StyledMovieNavLink to={goBackRef.current}>
+            Go back
+          </StyledMovieNavLink>
+          <h2>{movie.title !== '' ? movie.title : 'No title assigned yet'}</h2>
+        </StyledTitleWrapper>
+        <StyledTextWrapper>
+          {movie.poster_path && (
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              alt=""
+              width="250"
+              height="350"
+            />
+          )}
+
+          <StyledInfoMovieWrapper>
+            <p>
+              Rate:{' '}
+              {movie.vote_average.length
+                ? `${movie.vote_verage}/10`
+                : 'No rate yet'}
+            </p>
+            <p>
+              Description:{' '}
+              {movie.overview !== '' ? movie.overview : 'No description yet'}
+            </p>
+            <p>
+              Genres:{' '}
+              {movie.genres.length
+                ? movie.genres?.map(genre => genre.name).join(', ')
+                : 'The movie has not yet been assigned any genre'}
+            </p>
+          </StyledInfoMovieWrapper>
+        </StyledTextWrapper>
+      </StyledDescrWrapper>
       {video && (
         <iframe
           title={video}
@@ -65,14 +87,14 @@ const MovieDetails = () => {
           src={`https://www.youtube.com/embed/${video[0]?.key}`}
         ></iframe>
       )}
-      <div>
-        <Link to="cast">Cast</Link>
-        <Link to="reviews">Reviews</Link>
-      </div>
+      <StyledCastReviewWrapper>
+        <StyledMovieNavLink to="cast">Cast</StyledMovieNavLink>
+        <StyledMovieNavLink to="reviews">Reviews</StyledMovieNavLink>
+      </StyledCastReviewWrapper>
       <Suspense>
         <Outlet />
       </Suspense>
-    </div>
+    </StyledMovieWrapper>
   );
 };
 
