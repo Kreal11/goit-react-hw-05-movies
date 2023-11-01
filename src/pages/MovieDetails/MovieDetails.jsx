@@ -62,9 +62,7 @@ const MovieDetails = () => {
           <StyledInfoMovieWrapper>
             <p>
               Rate:{' '}
-              {movie.vote_average.length
-                ? `${movie.vote_verage}/10`
-                : 'No rate yet'}
+              {movie.vote_average ? `${movie.vote_average}/10` : 'No rate yet'}
             </p>
             <p>
               Description:{' '}
