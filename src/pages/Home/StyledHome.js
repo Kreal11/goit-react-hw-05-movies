@@ -9,7 +9,7 @@ export const StyledHomeUl = styled.ul`
   align-items: center;
   text-align: center;
   gap: 20px;
-  margin-top: 50px;
+  margin-top: 70px;
   font-size: 18px;
 `;
 
