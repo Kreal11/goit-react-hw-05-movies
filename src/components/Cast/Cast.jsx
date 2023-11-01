@@ -11,7 +11,7 @@ export const Cast = () => {
       try {
         const data = await fetchCastToMovieById(movieId);
         console.log(data);
-        setCast(prev => [...prev, ...data]);
+        setCast(data.cast);
       } catch (error) {}
     };
     getCast();
@@ -27,10 +27,14 @@ export const Cast = () => {
       <ul>
         {cast.map(actor => (
           <li key={actor.id}>
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
-              alt={actor.name}
-            />
+            {actor.profile_path && (
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+                alt={actor.name}
+                width="150"
+                height="200"
+              />
+            )}
             <p>{actor.name}</p>
             <p>Character: {actor.character}</p>
           </li>
