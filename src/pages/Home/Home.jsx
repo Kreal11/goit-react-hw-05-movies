@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchTrendingMovies } from 'services/movies-api';
 
-export const Home = () => {
+const Home = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <div>
+    <Suspense>
       <ul>
         {movies?.map(movie => (
           <li key={movie.id}>
@@ -27,6 +27,8 @@ export const Home = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Suspense>
   );
 };
+
+export default Home;

@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
+import React, { Suspense, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { fetchVideoToMovieById, fetchMovieById } from 'services/movies-api.js';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const goBackRef = useRef(location.state?.from || '/');
@@ -69,9 +69,11 @@ export const MovieDetails = () => {
         <Link to="cast">Cast</Link>
         <Link to="reviews">Reviews</Link>
       </div>
-      <div>
+      <Suspense>
         <Outlet />
-      </div>
+      </Suspense>
     </div>
   );
 };
+
+export default MovieDetails;

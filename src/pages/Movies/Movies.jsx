@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMovieByQuery } from 'services/movies-api';
 import { Link } from 'react-router-dom';
 
-export const Movies = () => {
+const Movies = () => {
   const [foundMovies, setFoundMovies] = useState([]);
   const [value, setValue] = useState('');
   const location = useLocation();
@@ -31,20 +31,30 @@ export const Movies = () => {
   }, [query]);
 
   return (
-    <div>
+    <Suspense>
       <input value={value} onChange={handleChange} type="text" />
       <button type="button" onClick={handleSetSearch}>
         Search
       </button>
       <ul>
-        {foundMovies?.map(movie => (
-          <li key={movie.id}>
-            <Link to={movie.id.toString()} state={{ from: location }}>
-              {movie.title ?? movie.name ?? movie.original_name}
-            </Link>
-          </li>
-        ))}
+        {query ? (
+          foundMovies.length ? (
+            foundMovies?.map(movie => (
+              <li key={movie.id}>
+                <Link to={movie.id.toString()} state={{ from: location }}>
+                  {movie.title ?? movie.name ?? movie.original_name}
+                </Link>
+              </li>
+            ))
+          ) : (
+            <h3>Sorry, there are no movies by your search</h3>
+          )
+        ) : (
+          <h3>Start your search</h3>
+        )}
       </ul>
-    </div>
+    </Suspense>
   );
 };
+
+export default Movies;
