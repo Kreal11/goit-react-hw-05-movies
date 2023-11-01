@@ -22,6 +22,6 @@ export const StyledNavLink = styled(NavLink)`
   &:hover {
     background-color: white;
     color: black;
-    box-shadow: 0 0 10px white;
+    box-shadow: 0 0 15px white;
   }
 `;

@@ -8,7 +8,7 @@ export const StyledHomeUl = styled.ul`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 16px;
+  gap: 20px;
   margin-top: 50px;
   font-size: 18px;
 `;
@@ -28,6 +28,6 @@ export const StyledNavLink = styled(NavLink)`
   &:hover {
     background-color: white;
     color: black;
-    box-shadow: 0 0 10px white;
+    box-shadow: 0 0 15px white;
   }
 `;
