@@ -5,7 +5,7 @@ import { StyledReviewsUl } from './StyledReviews';
 import styled from 'styled-components';
 import { Dna } from 'react-loader-spinner';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -70,3 +70,5 @@ export const Reviews = () => {
 const StyledPlugH2 = styled.h2`
   padding-bottom: 50px;
 `;
+
+export default Reviews;

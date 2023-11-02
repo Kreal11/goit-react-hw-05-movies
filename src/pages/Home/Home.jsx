@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { fetchTrendingMovies } from 'services/movies-api';
 import { StyledHomeHeader, StyledHomeUl, StyledNavLink } from './StyledHome';
@@ -19,7 +19,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Suspense>
+    <div>
       <StyledHomeHeader>🔥Trending movies of this week🔥</StyledHomeHeader>
       {movies.length > 0 ? (
         <StyledHomeUl>
@@ -41,7 +41,7 @@ const Home = () => {
           wrapperClass="dna-wrapper"
         />
       )}
-    </Suspense>
+    </div>
   );
 };
 

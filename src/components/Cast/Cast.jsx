@@ -5,7 +5,7 @@ import { StyledCastH2, StyledCastLi, StyledCastUl } from './StyledCast';
 import styled from 'styled-components';
 import { Dna } from 'react-loader-spinner';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -72,3 +72,5 @@ export const Cast = () => {
 const StyledPlugH2 = styled.h2`
   padding-bottom: 50px;
 `;
+
+export default Cast;

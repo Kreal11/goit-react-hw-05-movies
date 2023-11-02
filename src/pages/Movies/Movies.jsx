@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMovieByQuery } from 'services/movies-api';
 import {
@@ -43,18 +43,7 @@ const Movies = () => {
   }, [query]);
 
   return (
-    <Suspense
-      fallback={
-        <Dna
-          visible={true}
-          height="80"
-          width="80"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper"
-        />
-      }
-    >
+    <div>
       <StyledInputWrapper>
         <input value={value} onChange={handleChange} type="text" />
         <button type="button" onClick={handleSetSearch}>
@@ -92,7 +81,7 @@ const Movies = () => {
           )}
         </StyledSearchMoviesUl>
       )}
-    </Suspense>
+    </div>
   );
 };
 
