@@ -12,8 +12,11 @@ import {
   StyledTextWrapper,
   StyledTitleWrapper,
 } from './StyledMovieDetails';
+import { Dna } from 'react-loader-spinner';
+import styled from 'styled-components';
 
 const MovieDetails = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
   const location = useLocation();
   const goBackRef = useRef(location.state?.from || '/');
@@ -22,6 +25,7 @@ const MovieDetails = () => {
   const [video, setVideo] = useState({});
 
   useEffect(() => {
+    setIsLoading(true);
     const getMovie = async () => {
       try {
         const movieInfo = await fetchMovieById(movieId);
@@ -31,16 +35,29 @@ const MovieDetails = () => {
         // console.log(results);
         setMovie(movieInfo);
         setVideo(results);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     getMovie();
   }, [movieId]);
 
-  if (Object.keys(movie).length === 0) {
-    return <div>Loading...</div>;
-  }
+  // if (Object.keys(movie).length === 0) {
+  //   return <div>Loading...</div>;
+  // }
 
-  return (
+  return isLoading ? (
+    <Dna
+      visible={true}
+      height="80"
+      width="80"
+      ariaLabel="dna-loading"
+      wrapperStyle={{}}
+      wrapperClass="dna-wrapper"
+    />
+  ) : movie.length || video.length ? (
     <StyledMovieWrapper>
       <StyledDescrWrapper>
         <StyledTitleWrapper>
@@ -93,7 +110,14 @@ const MovieDetails = () => {
         <Outlet />
       </Suspense>
     </StyledMovieWrapper>
+  ) : (
+    <StyledPlugDiv>No data available, sorry</StyledPlugDiv>
   );
 };
+
+const StyledPlugDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 export default MovieDetails;

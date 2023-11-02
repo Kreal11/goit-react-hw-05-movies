@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 
 import { fetchTrendingMovies } from 'services/movies-api';
 import { StyledHomeHeader, StyledHomeUl, StyledNavLink } from './StyledHome';
+import { Dna } from 'react-loader-spinner';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -20,15 +21,26 @@ const Home = () => {
   return (
     <Suspense>
       <StyledHomeHeader>🔥Trending movies of this week🔥</StyledHomeHeader>
-      <StyledHomeUl>
-        {movies?.map(movie => (
-          <li key={movie.id}>
-            <StyledNavLink to={`/movies/${movie.id}`}>
-              {movie.title ?? movie.name ?? movie.original_name}
-            </StyledNavLink>
-          </li>
-        ))}
-      </StyledHomeUl>
+      {movies.length > 0 ? (
+        <StyledHomeUl>
+          {movies?.map(movie => (
+            <li key={movie.id}>
+              <StyledNavLink to={`/movies/${movie.id}`}>
+                {movie.title ?? movie.name ?? movie.original_name}
+              </StyledNavLink>
+            </li>
+          ))}
+        </StyledHomeUl>
+      ) : (
+        <Dna
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+        />
+      )}
     </Suspense>
   );
 };

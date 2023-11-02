@@ -3,6 +3,7 @@ import { Layout } from './Layout/Layout';
 import { Cast } from './Cast/Cast';
 import { Reviews } from './Reviews/Reviews';
 import { Suspense, lazy } from 'react';
+// import { Dna } from 'react-loader-spinner';
 // import { Home } from 'pages/Home/Home';
 // import Movies from 'pages/Movies/Movies';
 // import { MovieDetails } from 'pages/MovieDetails/MovieDetails';
@@ -15,7 +16,18 @@ const MovieDetails = lazy(() => import('pages/MovieDetails/MovieDetails'));
 
 export const App = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+    // fallback={
+    //   <Dna
+    //     visible={true}
+    //     height="80"
+    //     width="80"
+    //     ariaLabel="dna-loading"
+    //     wrapperStyle={{}}
+    //     wrapperClass="dna-wrapper"
+    //   />
+    // }
+    >
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
