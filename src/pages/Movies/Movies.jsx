@@ -76,7 +76,7 @@ const Movies = () => {
                 </li>
               ))
             ) : (
-              <StyledH3>Sorry, there are no movies by your search</StyledH3>
+              <StyledH3>Sorry, there are no movies by your search😭</StyledH3>
             )
           ) : (
             <StyledH3>Start your search☝️</StyledH3>
