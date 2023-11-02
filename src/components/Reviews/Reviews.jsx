@@ -3,24 +3,40 @@ import { useParams } from 'react-router-dom';
 import { fetchReviewsToMovieById } from 'services/movies-api';
 import { StyledReviewsUl } from './StyledReviews';
 import styled from 'styled-components';
+import { Dna } from 'react-loader-spinner';
 
 export const Reviews = () => {
   const { movieId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const getReviews = async () => {
       try {
         const dataReviews = await fetchReviewsToMovieById(movieId);
         console.log(dataReviews.results);
         setReviews(dataReviews.results);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     getReviews();
   }, [movieId]);
 
-  return (
+  return isLoading ? (
+    <Dna
+      visible={true}
+      height="80"
+      width="80"
+      ariaLabel="dna-loading"
+      wrapperStyle={{}}
+      wrapperClass="dna-wrapper"
+    />
+  ) : (
     <div>
       {reviews.length ? (
         <>
