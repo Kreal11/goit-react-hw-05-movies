@@ -51,14 +51,16 @@ const Movies = () => {
         </button>
       </StyledInputWrapper>
       {isLoading ? (
-        <Dna
-          visible={true}
-          height="80"
-          width="80"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper"
-        />
+        <StyledSpinnerWrapper>
+          <Dna
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
+          />
+        </StyledSpinnerWrapper>
       ) : (
         <StyledSearchMoviesUl $query={query} $foundMovies={foundMovies}>
           {query ? (
@@ -88,6 +90,15 @@ const Movies = () => {
 const StyledH3 = styled.h3`
   justify-content: center;
   margin: 0;
+`;
+
+const StyledSpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  margin: 0 auto;
+  padding: 40px 0;
 `;
 
 export default Movies;

@@ -49,15 +49,17 @@ const MovieDetails = () => {
   // }
 
   return isLoading ? (
-    <Dna
-      visible={true}
-      height="80"
-      width="80"
-      ariaLabel="dna-loading"
-      wrapperStyle={{}}
-      wrapperClass="dna-wrapper"
-    />
-  ) : movie.length || video.length ? (
+    <StyledSpinnerWrapper>
+      <Dna
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="dna-loading"
+        wrapperStyle={{}}
+        wrapperClass="dna-wrapper"
+      />
+    </StyledSpinnerWrapper>
+  ) : movie ? (
     <StyledMovieWrapper>
       <StyledDescrWrapper>
         <StyledTitleWrapper>
@@ -87,7 +89,7 @@ const MovieDetails = () => {
             </p>
             <p>
               Genres:{' '}
-              {movie.genres.length
+              {movie.genres?.length
                 ? movie.genres?.map(genre => genre.name).join(', ')
                 : 'The movie has not yet been assigned any genre'}
             </p>
@@ -118,6 +120,15 @@ const MovieDetails = () => {
 const StyledPlugDiv = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const StyledSpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  margin: 0 auto;
+  padding: 40px 0;
 `;
 
 export default MovieDetails;
