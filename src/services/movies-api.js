@@ -11,11 +11,8 @@ export const fetchTrendingMovies = async params => {
       api_key: API_KEY,
     },
   });
-  // console.log(data);
   return data;
 };
-
-//api.themoviedb.org/3/movie/{movie_id}
 
 export const fetchMovieById = async movieId => {
   const { data } = await axios.get(`movie/${movieId}`, {
@@ -32,7 +29,6 @@ export const fetchVideoToMovieById = async movieId => {
       api_key: API_KEY,
     },
   });
-  console.log(data);
   return data;
 };
 
@@ -42,7 +38,6 @@ export const fetchCastToMovieById = async movieId => {
       api_key: API_KEY,
     },
   });
-  // console.log(data);
   return data;
 };
 
@@ -52,7 +47,6 @@ export const fetchReviewsToMovieById = async movieId => {
       api_key: API_KEY,
     },
   });
-  console.log(data);
   return data;
 };
 
@@ -65,5 +59,3 @@ export const fetchMovieByQuery = async params => {
   });
   return data;
 };
-
-// https://api.themoviedb.org/3/search/movie

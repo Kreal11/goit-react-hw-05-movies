@@ -31,9 +31,6 @@ const MovieDetails = () => {
       try {
         const movieInfo = await fetchMovieById(movieId);
         const { results } = await fetchVideoToMovieById(movieId);
-
-        console.log(movieInfo);
-        // console.log(results);
         setMovie(movieInfo);
         setVideo(results);
       } catch (error) {

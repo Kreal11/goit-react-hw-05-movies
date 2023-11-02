@@ -13,7 +13,6 @@ const Home = () => {
       try {
         const { results } = await fetchTrendingMovies();
         setMovies(prev => [...prev, ...results]);
-        console.log(results);
       } catch (error) {}
     };
     getFilms();

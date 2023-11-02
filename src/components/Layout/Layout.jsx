@@ -6,11 +6,9 @@ export const Layout = () => {
   return (
     <div>
       <Navbar />
-      {/* <div> */}
       <Suspense>
         <Outlet />
       </Suspense>
-      {/* </div> */}
     </div>
   );
 };
