@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchReviewsToMovieById } from 'services/movies-api';
 import { StyledReviewsUl } from './StyledReviews';
+import styled from 'styled-components';
 
 export const Reviews = () => {
   const { movieId } = useParams();
@@ -44,8 +45,12 @@ export const Reviews = () => {
           </StyledReviewsUl>
         </>
       ) : (
-        <h2>There are no reviews, sorry!</h2>
+        <StyledPlugH2>There are no reviews, sorry!</StyledPlugH2>
       )}
     </div>
   );
 };
+
+const StyledPlugH2 = styled.h2`
+  padding-bottom: 50px;
+`;

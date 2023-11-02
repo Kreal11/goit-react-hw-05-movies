@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchCastToMovieById } from 'services/movies-api';
 import { StyledCastH2, StyledCastLi, StyledCastUl } from './StyledCast';
+import styled from 'styled-components';
 
 export const Cast = () => {
   const { movieId } = useParams();
@@ -19,7 +20,7 @@ export const Cast = () => {
   }, [movieId]);
 
   if (cast.length === 0) {
-    return <div>No cast information available</div>;
+    return <StyledPlugH2>No cast information available</StyledPlugH2>;
   }
 
   return (
@@ -51,3 +52,7 @@ export const Cast = () => {
     </div>
   );
 };
+
+const StyledPlugH2 = styled.h2`
+  padding-bottom: 50px;
+`;

@@ -10,6 +10,7 @@ export const StyledCastUl = styled.ul`
   margin-top: 70px;
   font-size: 18px;
   max-width: 840px;
+  padding-bottom: 30px;
 `;
 
 export const StyledCastLi = styled.li`
