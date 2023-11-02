@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchCastToMovieById } from 'services/movies-api';
+import { StyledCastH2, StyledCastLi, StyledCastUl } from './StyledCast';
 
 export const Cast = () => {
   const { movieId } = useParams();
@@ -23,10 +24,10 @@ export const Cast = () => {
 
   return (
     <div>
-      <h2>Cast</h2>
-      <ul>
+      <StyledCastH2>Cast</StyledCastH2>
+      <StyledCastUl>
         {cast.map(actor => (
-          <li key={actor.id}>
+          <StyledCastLi key={actor.id}>
             {actor.profile_path && (
               <img
                 src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
@@ -44,9 +45,9 @@ export const Cast = () => {
                 ? actor.character
                 : 'No information about actor`s character'}
             </p>
-          </li>
+          </StyledCastLi>
         ))}
-      </ul>
+      </StyledCastUl>
     </div>
   );
 };
