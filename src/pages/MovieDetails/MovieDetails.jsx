@@ -21,7 +21,7 @@ const MovieDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const goBackRef = useRef(location.state?.from || '/');
-
+  const [error, setError] = useState('');
   const [movie, setMovie] = useState({});
   const [video, setVideo] = useState({});
 
@@ -34,27 +34,33 @@ const MovieDetails = () => {
         setMovie(movieInfo);
         setVideo(results);
       } catch (error) {
-        navigate('/404');
         console.log(error);
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
     };
     getMovie();
-  }, [movieId, navigate]);
+  }, [movieId]);
+  if (error) {
+    navigate('/404');
+  }
 
-  return isLoading ? (
-    <StyledSpinnerWrapper>
-      <Dna
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="dna-loading"
-        wrapperStyle={{}}
-        wrapperClass="dna-wrapper"
-      />
-    </StyledSpinnerWrapper>
-  ) : movie ? (
+  if (isLoading) {
+    return (
+      <StyledSpinnerWrapper>
+        <Dna
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+        />
+      </StyledSpinnerWrapper>
+    );
+  }
+  return (
     <StyledMovieWrapper>
       <StyledDescrWrapper>
         <StyledTitleWrapper>
@@ -107,15 +113,8 @@ const MovieDetails = () => {
         <Outlet />
       </Suspense>
     </StyledMovieWrapper>
-  ) : (
-    <StyledPlugDiv>No data available, sorry</StyledPlugDiv>
   );
 };
-
-const StyledPlugDiv = styled.div`
-  display: flex;
-  justify-content: center;
-`;
 
 const StyledSpinnerWrapper = styled.div`
   display: flex;
