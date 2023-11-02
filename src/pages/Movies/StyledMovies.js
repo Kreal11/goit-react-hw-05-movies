@@ -3,7 +3,16 @@ import styled from 'styled-components';
 
 export const StyledSearchMoviesUl = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: ${props => {
+    switch (props) {
+      case '$query':
+        return 'repeat(3, 1fr)';
+      case '$foundMovies':
+        return 'repeat(3, 1fr)';
+      default:
+        return 'repeat(1)';
+    }
+  }};
   flex-direction: column;
   align-items: center;
   text-align: center;

@@ -6,6 +6,7 @@ import {
   StyledNavLink,
   StyledSearchMoviesUl,
 } from './StyledMovies';
+import styled from 'styled-components';
 
 const Movies = () => {
   const [foundMovies, setFoundMovies] = useState([]);
@@ -42,7 +43,7 @@ const Movies = () => {
           Search
         </button>
       </StyledInputWrapper>
-      <StyledSearchMoviesUl>
+      <StyledSearchMoviesUl $query={query} $foundMovies={foundMovies}>
         {query ? (
           foundMovies.length ? (
             foundMovies?.map(movie => (
@@ -56,14 +57,19 @@ const Movies = () => {
               </li>
             ))
           ) : (
-            <h3>Sorry, there are no movies by your search</h3>
+            <StyledH3>Sorry, there are no movies by your search</StyledH3>
           )
         ) : (
-          <h3>Start your search</h3>
+          <StyledH3>Start your search☝️</StyledH3>
         )}
       </StyledSearchMoviesUl>
     </Suspense>
   );
 };
+
+const StyledH3 = styled.h3`
+  justify-content: center;
+  margin: 0;
+`;
 
 export default Movies;
