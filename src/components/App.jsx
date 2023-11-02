@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
 import { Cast } from './Cast/Cast';
 import { Reviews } from './Reviews/Reviews';
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 // import { Dna } from 'react-loader-spinner';
 // import { Home } from 'pages/Home/Home';
 // import Movies from 'pages/Movies/Movies';
@@ -16,18 +16,7 @@ const MovieDetails = lazy(() => import('pages/MovieDetails/MovieDetails'));
 
 export const App = () => {
   return (
-    <Suspense
-    // fallback={
-    //   <Dna
-    //     visible={true}
-    //     height="80"
-    //     width="80"
-    //     ariaLabel="dna-loading"
-    //     wrapperStyle={{}}
-    //     wrapperClass="dna-wrapper"
-    //   />
-    // }
-    >
+    <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -39,6 +28,6 @@ export const App = () => {
         </Route>
         <Route path="*" element={<Navigate to="/" />}></Route>
       </Routes>
-    </Suspense>
+    </>
   );
 };
