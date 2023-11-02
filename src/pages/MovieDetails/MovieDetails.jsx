@@ -1,5 +1,5 @@
 import React, { Suspense, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { fetchVideoToMovieById, fetchMovieById } from 'services/movies-api.js';
@@ -18,6 +18,7 @@ import styled from 'styled-components';
 const MovieDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
+  const navigate = useNavigate();
   const location = useLocation();
   const goBackRef = useRef(location.state?.from || '/');
 
@@ -36,17 +37,14 @@ const MovieDetails = () => {
         setMovie(movieInfo);
         setVideo(results);
       } catch (error) {
+        navigate('/404');
         console.log(error);
       } finally {
         setIsLoading(false);
       }
     };
     getMovie();
-  }, [movieId]);
-
-  // if (Object.keys(movie).length === 0) {
-  //   return <div>Loading...</div>;
-  // }
+  }, [movieId, navigate]);
 
   return isLoading ? (
     <StyledSpinnerWrapper>
