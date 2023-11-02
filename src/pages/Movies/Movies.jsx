@@ -49,6 +49,7 @@ const Movies = () => {
           Search
         </button>
       </StyledInputWrapper>
+
       {isLoading ? (
         <StyledSpinnerWrapper>
           <Dna
@@ -60,35 +61,35 @@ const Movies = () => {
             wrapperClass="dna-wrapper"
           />
         </StyledSpinnerWrapper>
-      ) : (
-        <StyledSearchMoviesUl $query={query} $foundMovies={foundMovies}>
-          {query ? (
-            foundMovies.length ? (
-              foundMovies?.map(movie => (
-                <li key={movie.id}>
-                  <StyledNavLink
-                    to={movie.id.toString()}
-                    state={{ from: location }}
-                  >
-                    {movie.title ?? movie.name ?? movie.original_name}
-                  </StyledNavLink>
-                </li>
-              ))
-            ) : (
-              <StyledH3>Sorry, there are no movies by your search😭</StyledH3>
-            )
-          ) : (
-            <StyledH3>Start your search☝️</StyledH3>
-          )}
+      ) : null}
+
+      {foundMovies.length ? (
+        <StyledSearchMoviesUl>
+          {foundMovies?.map(movie => (
+            <li key={movie.id}>
+              <StyledNavLink
+                to={movie.id.toString()}
+                state={{ from: location }}
+              >
+                {movie.title ?? movie.name ?? movie.original_name}
+              </StyledNavLink>
+            </li>
+          ))}
         </StyledSearchMoviesUl>
+      ) : null}
+
+      {!foundMovies.length && query && (
+        <StyledH3>No data for you query😭</StyledH3>
       )}
+
+      {!query && <StyledH3>Start your search☝️</StyledH3>}
     </div>
   );
 };
 
 const StyledH3 = styled.h3`
-  justify-content: center;
-  margin: 0;
+  margin-top: 40px;
+  text-align: center;
 `;
 
 const StyledSpinnerWrapper = styled.div`
