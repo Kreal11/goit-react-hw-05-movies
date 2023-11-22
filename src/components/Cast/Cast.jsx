@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchCastToMovieById } from 'services/movies-api';
 import { StyledCastH2, StyledCastLi, StyledCastUl } from './StyledCast';
 import styled from 'styled-components';
-import { Dna } from 'react-loader-spinner';
+import { Loader } from 'components/Loader/Loader';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -26,14 +26,7 @@ const Cast = () => {
   }, [movieId]);
 
   return isLoading ? (
-    <Dna
-      visible={true}
-      height="80"
-      width="80"
-      ariaLabel="dna-loading"
-      wrapperStyle={{}}
-      wrapperClass="dna-wrapper"
-    />
+    <Loader />
   ) : (
     <div>
       <StyledCastH2>Cast</StyledCastH2>

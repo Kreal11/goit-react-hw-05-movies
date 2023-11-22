@@ -12,8 +12,7 @@ import {
   StyledTextWrapper,
   StyledTitleWrapper,
 } from './StyledMovieDetails';
-import { Dna } from 'react-loader-spinner';
-import styled from 'styled-components';
+import { Loader } from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +29,7 @@ const MovieDetails = () => {
     const getMovie = async () => {
       try {
         const movieInfo = await fetchMovieById(movieId);
-        const { results } = await fetchVideoToMovieById(movieId);
+        const results = await fetchVideoToMovieById(movieId);
         setMovie(movieInfo);
         setVideo(results);
       } catch (error) {
@@ -47,18 +46,7 @@ const MovieDetails = () => {
   }
 
   if (isLoading) {
-    return (
-      <StyledSpinnerWrapper>
-        <Dna
-          visible={true}
-          height="80"
-          width="80"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper"
-        />
-      </StyledSpinnerWrapper>
-    );
+    return <Loader />;
   }
   return (
     <StyledMovieWrapper>
@@ -102,7 +90,7 @@ const MovieDetails = () => {
           title={video}
           width="560"
           height="315"
-          src={`https://www.youtube.com/embed/${video[0]?.key}`}
+          src={`https://www.youtube.com/embed/${video?.key}`}
         ></iframe>
       )}
       <StyledCastReviewWrapper>
@@ -115,14 +103,5 @@ const MovieDetails = () => {
     </StyledMovieWrapper>
   );
 };
-
-const StyledSpinnerWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  margin: 0 auto;
-  padding: 40px 0;
-`;
 
 export default MovieDetails;

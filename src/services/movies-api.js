@@ -29,7 +29,10 @@ export const fetchVideoToMovieById = async movieId => {
       api_key: API_KEY,
     },
   });
-  return data;
+  const teasers = data.results.find(
+    video => video.type === 'Teaser' || video.type === 'Trailer'
+  );
+  return teasers;
 };
 
 export const fetchCastToMovieById = async movieId => {

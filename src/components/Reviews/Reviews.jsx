@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchReviewsToMovieById } from 'services/movies-api';
 import { StyledReviewsUl } from './StyledReviews';
 import styled from 'styled-components';
-import { Dna } from 'react-loader-spinner';
+import { Loader } from 'components/Loader/Loader';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -27,14 +27,7 @@ const Reviews = () => {
   }, [movieId]);
 
   return isLoading ? (
-    <Dna
-      visible={true}
-      height="80"
-      width="80"
-      ariaLabel="dna-loading"
-      wrapperStyle={{}}
-      wrapperClass="dna-wrapper"
-    />
+    <Loader />
   ) : (
     <div>
       {reviews.length ? (
